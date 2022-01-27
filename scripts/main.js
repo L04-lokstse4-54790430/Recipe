@@ -1,10 +1,24 @@
 var el_up = document.getElementById("GFG_UP");
-        var totalData = 0;
-        var totalPage = 1;
-        var offset = 5
-        var cuisine = '';
+var totalData = 0;
+var totalPage = 1;
+var offset = 5
+var cuisine = '';
+var activeFilter = 'all';
 
-        function constructTable(selector, cuisines) {
+$('.pp-filter-button').on('click', function(e) {
+  // remove btn-primary from all buttons first
+  $('.pp-filter-button').removeClass('btn-primary');
+  $('.pp-filter-button').addClass('btn-outline-primary');
+
+  // add btn-primary to active button
+  var button = $(this);
+  button.removeClass('btn-outline-primary');
+  button.addClass('btn-primary');
+  filterItems(button.data("filter"));
+  e.preventDefault();
+})
+
+function constructTable(selector, cuisines) {
             var keywords = document.getElementById('keywords').value.trim();
             if(cuisines == ''){
               cuisine = cuisine;
@@ -54,7 +68,7 @@ var el_up = document.getElementById("GFG_UP");
             }).catch(err => {
                 $(selector).append($('There is something wrong.'));
             });
-        }
+}
 
 function getRecipe(id) {
             var apiUrl = "https://api.spoonacular.com/recipes/"+ id +"/information?apiKey="+config.apiKey;
