@@ -14,7 +14,6 @@ $('.pp-filter-button').on('click', function(e) {
   var button = $(this);
   button.removeClass('btn-outline-primary');
   button.addClass('btn-primary');
-  filterItems(button.data("filter"));
   e.preventDefault();
 })
 
